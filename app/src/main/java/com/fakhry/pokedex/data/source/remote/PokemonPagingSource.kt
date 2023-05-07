@@ -52,6 +52,6 @@ class PokemonPagingSource(
     }
 
     companion object {
-        const val POKEMON_PAGING_LIMIT = 10
+        const val POKEMON_PAGING_LIMIT = 5
     }
 }

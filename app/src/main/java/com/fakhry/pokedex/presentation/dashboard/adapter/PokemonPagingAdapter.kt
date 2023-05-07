@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.fakhry.pokedex.R
+import com.fakhry.pokedex.core.utils.loadWithShimmer
 import com.fakhry.pokedex.databinding.ItemPokemonBinding
 import com.fakhry.pokedex.domain.model.Pokemon
 
@@ -13,7 +15,6 @@ class PokemonPagingAdapter : PagingDataAdapter<Pokemon, PokemonPagingAdapter.Vie
 ) {
 
     var onDetailClick: ((Int) -> Unit)? = null
-    var onLoadDetails: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -38,8 +39,9 @@ class PokemonPagingAdapter : PagingDataAdapter<Pokemon, PokemonPagingAdapter.Vie
 
         private fun initView(data: Pokemon) {
             binding.apply {
-                onLoadDetails?.invoke(data.id)
+                tvPokemonId.text = tvPokemonId.context.getString(R.string.text_no_pokemon, data.id)
                 tvPokemonName.text = data.name
+                ivPokemonFront.loadWithShimmer(data.frontImage)
             }
         }
 

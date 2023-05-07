@@ -40,6 +40,7 @@
     <string name="text_error_network_failure">Oops, network failure. Please check your internet connection.</string>
     <string name="text_error_conn_time_out">Oops, connection timed out. Please check your connection to internet</string>
     <string name="text_error_network_not_avail">Oops, you seem to be offline. Please check your connection to internet.</string>
+    <string name="text_no_pokemon">No. %1$d</string>
 
 
 </resources>

@@ -1,6 +1,9 @@
 package com.fakhry.pokedex.data.model
 
+import com.fakhry.pokedex.domain.model.Pokemon
+import com.fakhry.pokedex.domain.model.PokemonType
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class PokemonDetailsResponse(
 
@@ -52,6 +55,17 @@ data class PokemonDetailsResponse(
     @field:SerializedName("order")
     val order: Int? = null
 )
+
+fun PokemonDetailsResponse.mapToDomain(): Pokemon {
+    return Pokemon(
+        id = id,
+        name = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
+        weight = weight ?: 0,
+        frontImage = sprites?.frontDefault ?: "",
+        types = types.map { PokemonType(id = it.slot, name = it.type.name) }
+    )
+}
+
 
 data class TypesItem(
 

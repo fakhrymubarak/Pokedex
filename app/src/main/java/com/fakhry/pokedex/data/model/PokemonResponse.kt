@@ -2,6 +2,7 @@ package com.fakhry.pokedex.data.model
 
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class PokemonResponse(
 
@@ -33,6 +34,6 @@ fun PokemonData.mapToDomain(): Pokemon {
     val id = listPath.last().toInt()
     return Pokemon(
         id = id,
-        name = name,
+        name = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
     )
 }

@@ -55,6 +55,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">@style/Text.Regular.16sp</item>
         <item name="errorTextAppearance">@style/Text.Regular.16sp.Red</item>
+        <item name="android:includeFontPadding">false</item>
         <item name="boxStrokeErrorColor">@color/color_red50</item>
         <item name="errorTextColor">@color/color_red50</item>
         <item name="hintEnabled">true</item>

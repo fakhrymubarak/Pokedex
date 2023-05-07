@@ -2,6 +2,7 @@ package com.fakhry.pokedex.domain.usecases
 
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.fakhry.pokedex.core.enums.DataResource
 import com.fakhry.pokedex.data.model.mapToDomain
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.domain.repository.PokemonRepository
@@ -14,7 +15,16 @@ class GetPagingPokemonUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): Flow<PagingData<Pokemon>> {
         return repository.getPagingPokemon().flow.map { pagingData ->
-            pagingData.map { data -> data.mapToDomain() }
+            pagingData.map { data ->
+                val listPath = data.url.split('/').toMutableList()
+                listPath.removeLast()
+                val id = listPath.last().toInt()
+
+                when (val detailsResult = repository.getPokemonDetails(id)) {
+                    is DataResource.Error -> data.mapToDomain()
+                    is DataResource.Success -> detailsResult.data.mapToDomain()
+                }
+            }
         }
     }
 }

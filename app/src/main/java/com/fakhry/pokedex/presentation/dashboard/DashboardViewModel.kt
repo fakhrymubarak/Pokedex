@@ -20,8 +20,4 @@ class DashboardViewModel @Inject constructor(
     suspend fun getListBusiness() {
         collectLifecycleFlow(getPagingPokemon()) { _listBusiness.emit(it) }
     }
-
-    fun loadDetails() {
-        // fetch details to get pokemon images.
-    }
 }

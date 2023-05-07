@@ -42,10 +42,6 @@ class DashboardActivity : AppCompatActivity() {
     private fun initView() {
         pokemonAdapter = PokemonPagingAdapter()
         binding.rvPokemon.adapter = pokemonAdapter.withLoadStateFooter(ItemLoadStateAdapter())
-
-        pokemonAdapter.onLoadDetails = {
-            viewModel.loadDetails()
-        }
     }
 
     private fun initListener() {
