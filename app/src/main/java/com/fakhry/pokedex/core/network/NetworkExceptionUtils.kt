@@ -35,7 +35,7 @@ fun getMessageFromException(e: Exception): NetworkExceptionResult {
 
                 // handling apps error
                 if (e.code() == 400 || e.code() == 401 || e.code() == 404) {
-                    uiText = UiText.DynamicString(errorResponse.error.description)
+                    uiText = UiText.DynamicString(errorResponse.message)
                 }
 
             } catch (iOException: IOException) {
