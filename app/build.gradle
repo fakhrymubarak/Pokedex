@@ -25,16 +25,14 @@ android {
             minifyEnabled true
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", '"https://api.yelp.com/"'
-            buildConfigField "String", "TOKEN_ACCESS", '"OyFRR5PRd5I5hJ1f1ihFkqyANxelEJi0L6T06z3OvrthiWSan7_0ZZSZ_IhganUVxsCMwcxA-qmCeJJGkcyN-zW5CMWm-IVlyc0JZx2Ya92MU6Smr9OTuHuoy2EzY3Yx"'
+            buildConfigField "String", "BASE_URL", '"https://pokeapi.co/api/v2/"'
 
         }
 
         debug {
             versionNameSuffix '-dev'
             minifyEnabled false
-            buildConfigField "String", "BASE_URL", '"https://api.yelp.com/"'
-            buildConfigField "String", "TOKEN_ACCESS", '"OyFRR5PRd5I5hJ1f1ihFkqyANxelEJi0L6T06z3OvrthiWSan7_0ZZSZ_IhganUVxsCMwcxA-qmCeJJGkcyN-zW5CMWm-IVlyc0JZx2Ya92MU6Smr9OTuHuoy2EzY3Yx"'
+            buildConfigField "String", "BASE_URL", '"https://pokeapi.co/api/v2/"'
         }
     }
 
