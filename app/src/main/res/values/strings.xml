@@ -41,6 +41,10 @@
     <string name="text_error_conn_time_out">Oops, connection timed out. Please check your connection to internet</string>
     <string name="text_error_network_not_avail">Oops, you seem to be offline. Please check your connection to internet.</string>
     <string name="text_no_pokemon">No. %1$d</string>
+    <string name="text_pokemon_type">Pokemon Types</string>
+    <string name="text_catch_pokemon">Catch Pokemon!</string>
+    <string name="weight">Weight :</string>
+    <string name="text_weight">%1$d lbs</string>
 
 
 </resources>

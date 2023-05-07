@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv_pokemon_type"
+    style="@style/Text.Regular"
+    android:layout_width="wrap_content"
+    android:layout_height="35dp"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/spacing_tiny"
+    android:background="@drawable/bg_btn_outline_gray3"
+    android:button="@null"
+    android:gravity="center"
+    android:paddingHorizontal="@dimen/spacing_normal_quarter"
+    android:textColor="@color/color_selector_checkbox_icon"
+    app:buttonCompat="@null"
+    tools:text="@tools:sample/cities" />

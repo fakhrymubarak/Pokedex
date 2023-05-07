@@ -1,5 +1,6 @@
 package com.fakhry.pokedex.presentation.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import com.fakhry.pokedex.core.enums.EXTRA_POKEMON
 import com.fakhry.pokedex.core.enums.asString
 import com.fakhry.pokedex.core.network.getMessageFromException
 import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
@@ -19,6 +21,7 @@ import com.fakhry.pokedex.databinding.ActivityDashboardBinding
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.presentation.dashboard.adapter.ItemLoadStateAdapter
 import com.fakhry.pokedex.presentation.dashboard.adapter.PokemonPagingAdapter
+import com.fakhry.pokedex.presentation.pokemon_details.PokemonDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -46,7 +49,9 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun initListener() {
         pokemonAdapter.onDetailClick = {
-            showToast("details clicked")
+            val intent = Intent(this, PokemonDetailsActivity::class.java)
+            intent.putExtra(EXTRA_POKEMON, it)
+            startActivity(intent)
         }
     }
 

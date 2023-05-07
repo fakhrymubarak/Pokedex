@@ -14,7 +14,7 @@ class PokemonPagingAdapter : PagingDataAdapter<Pokemon, PokemonPagingAdapter.Vie
     PokemonDiffCallback()
 ) {
 
-    var onDetailClick: ((Int) -> Unit)? = null
+    var onDetailClick: ((Pokemon) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -48,7 +48,7 @@ class PokemonPagingAdapter : PagingDataAdapter<Pokemon, PokemonPagingAdapter.Vie
         private fun initListener(data: Pokemon) {
             binding.apply {
                 root.setOnClickListener {
-                    onDetailClick?.invoke(data.id)
+                    onDetailClick?.invoke(data)
                 }
             }
         }
