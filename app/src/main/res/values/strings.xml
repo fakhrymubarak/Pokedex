@@ -43,8 +43,10 @@
     <string name="text_no_pokemon">No. %1$d</string>
     <string name="text_pokemon_type">Pokemon Types</string>
     <string name="text_catch_pokemon">Catch Pokemon!</string>
+    <string name="text_save">Save</string>
     <string name="weight">Weight :</string>
     <string name="text_weight">%1$d lbs</string>
+    <string name="text_nickname_hint">Give the pokemon nickname</string>
 
 
 </resources>

@@ -72,6 +72,7 @@
 
     <style name="TextInputEdit.Regular">
         <item name="android:textAppearance">@style/Text.Regular.16sp</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <!-- TEXT STYLES -->
@@ -158,6 +159,7 @@
     <!-- BOTTOM SHEET DIALOG -->
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">

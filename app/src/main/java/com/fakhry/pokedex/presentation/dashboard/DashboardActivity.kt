@@ -10,6 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.fakhry.pokedex.core.enums.EXTRA_POKEMON_ID
+import com.fakhry.pokedex.core.enums.NetworkException
 import com.fakhry.pokedex.core.enums.asString
 import com.fakhry.pokedex.core.network.getMessageFromException
 import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
@@ -72,6 +73,7 @@ class DashboardActivity : AppCompatActivity() {
             val state = loadStates.refresh
             populateLoadingPokemon(state is LoadState.Loading)
             if (state is LoadState.Error) {
+                if (state.error is NetworkException) showToast(state.error.message!!)
                 val networkException = getMessageFromException(state.error as Exception)
                 showToast(networkException.errorMessages.asString(this))
                 pokemonAdapter.retry()

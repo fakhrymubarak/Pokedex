@@ -3,6 +3,7 @@ package com.fakhry.pokedex.presentation.pokemon_details
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.fakhry.pokedex.R
 import com.fakhry.pokedex.core.enums.EXTRA_POKEMON_ID
@@ -12,6 +13,7 @@ import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
 import com.fakhry.pokedex.core.utils.components.showToast
 import com.fakhry.pokedex.core.utils.components.viewBinding
 import com.fakhry.pokedex.core.utils.isShimmerStarted
+import com.fakhry.pokedex.core.utils.isVisible
 import com.fakhry.pokedex.databinding.ActivityPokemonDetailsBinding
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.presentation.pokemon_details.adapter.PhotoAdapter
@@ -66,6 +68,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
 
         binding.btnCatchPokemon.setOnClickListener {
+            viewModel.catchPokemon()
         }
     }
 
@@ -81,6 +84,31 @@ class PokemonDetailsActivity : AppCompatActivity() {
                 is UiState.Success -> populatePokemonDetails(state.data)
             }
         }
+        collectLifecycleFlow(viewModel.catchPokemonState) { state ->
+            when (state) {
+                is UiState.Error -> updateCatchMessage(state.uiText.asString(this), false)
+                is UiState.Loading -> populateLoadingButton(state.isLoading)
+                is UiState.Success -> {
+                    updateCatchMessage(state.data.asString(this), true)
+                    showBottomSheetNickname()
+                }
+            }
+        }
+    }
+
+    private fun updateCatchMessage(message: String, isSuccess: Boolean) {
+        binding.tvCatchMessage.apply {
+            text = message
+
+            val textColor = if (isSuccess) R.color.color_green50 else R.color.color_red50
+            setTextColor(ContextCompat.getColor(this@PokemonDetailsActivity, textColor))
+        }
+    }
+
+    private fun populateLoadingButton(isLoading: Boolean) {
+        binding.tvCatchMessage.isVisible(true)
+        binding.btnCatchPokemon.isEnabled = !isLoading
+        binding.pbLoading.isVisible(isLoading, true)
     }
 
     private fun populatePokemonDetails(pokemon: Pokemon) {
@@ -91,5 +119,10 @@ class PokemonDetailsActivity : AppCompatActivity() {
             viewModel.setTotalPictures(pokemon.pictures.size)
             tvPokemonWeightValue.text = getString(R.string.text_weight, pokemon.weight)
         }
+    }
+
+    private fun showBottomSheetNickname() {
+        val sheet = NicknameDialog()
+        if(!sheet.isAdded) sheet.show(supportFragmentManager, sheet.tag)
     }
 }
