@@ -1,9 +1,5 @@
 package com.fakhry.pokedex.domain.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class Pokemon(
     val id: Int,
     val name: String,
@@ -11,4 +7,4 @@ data class Pokemon(
     val frontImage: String = "",
     val pictures: List<String> = listOf(),
     val types: List<PokemonType> = listOf(),
-) : Parcelable
+)

@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import com.fakhry.pokedex.core.enums.EXTRA_POKEMON
+import com.fakhry.pokedex.core.enums.EXTRA_POKEMON_ID
 import com.fakhry.pokedex.core.enums.asString
 import com.fakhry.pokedex.core.network.getMessageFromException
 import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
@@ -50,7 +50,7 @@ class DashboardActivity : AppCompatActivity() {
     private fun initListener() {
         pokemonAdapter.onDetailClick = {
             val intent = Intent(this, PokemonDetailsActivity::class.java)
-            intent.putExtra(EXTRA_POKEMON, it)
+            intent.putExtra(EXTRA_POKEMON_ID, it.id)
             startActivity(intent)
         }
     }
