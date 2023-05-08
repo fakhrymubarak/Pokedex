@@ -35,19 +35,6 @@
         <item name="postSplashScreenTheme">@style/BaseTheme</item>
     </style>
 
-    <!-- SPLASH ACTIVITY -->
-    <style name="AppTheme" parent="BaseTheme" />
-
-    <style name="AppTheme.AppBar">
-        <item name="colorPrimary">@color/color_white</item>
-    </style>
-
-    <style name="AppTheme.BackgroundSplash" parent="AppTheme">
-        <item name="android:windowBackground">@color/color_primary_apps</item>
-        <item name="colorPrimaryDark">@color/color_primary_apps</item>
-        <item name="colorPrimaryVariant">@color/color_primary_apps</item>
-    </style>
-
 
     <!--TEXT INPUT-->
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -104,10 +91,6 @@
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 
-    <style name="Text.Medium.10sp">
-        <item name="android:textSize">10sp</item>
-    </style>
-
     <!-- Poppins 600 -->
     <style name="Text.SemiBold">
         <item name="android:fontFamily">@font/poppins_semibold</item>
@@ -135,27 +118,6 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="Button.Primary.Outlined">
-        <item name="android:textAppearance">@style/Text.SemiBold</item>
-        <item name="android:background">@drawable/selector_btn_outline_primary</item>
-        <item name="android:textColor">@color/color_selector_text_button_outlined</item>
-    </style>
-
-    <style name="Button.Small">
-        <item name="android:minWidth">0dp</item>
-        <item name="android:minHeight">0dp</item>
-        <item name="android:paddingTop">@dimen/spacing_smaller</item>
-        <item name="android:paddingBottom">@dimen/spacing_smaller</item>
-        <item name="android:paddingStart">@dimen/spacing_regular</item>
-        <item name="android:paddingEnd">@dimen/spacing_regular</item>
-    </style>
-
-    <style name="Button.Small.Primary">
-        <item name="android:background">@drawable/selector_btn_primary</item>
-        <item name="android:textColor">@color/color_white</item>
-        <item name="android:textAppearance">@style/Text.SemiBold</item>
-    </style>
-
     <!-- BOTTOM SHEET DIALOG -->
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
@@ -177,24 +139,4 @@
         <item name="cornerSize">@dimen/radius_smaller</item>
     </style>
 
-    <style name="ShapeCircle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
-
-
-    <!-- STYLE TAB LAYOUT -->
-    <style name="TabTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">@dimen/font_regular</item>
-        <item name="android:fontFamily">@font/poppins_semibold</item>
-        <item name="android:textColor">@color/color_black</item>
-    </style>
-
-    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
-        <item name="tabTextAppearance">@style/TabTextAppearance</item>
-        <item name="tabIndicatorColor">@color/color_primary50</item>
-        <item name="tabSelectedTextColor">@color/color_primary50</item>
-        <item name="tabIndicatorHeight">3.5dp</item>
-    </style>
 </resources>

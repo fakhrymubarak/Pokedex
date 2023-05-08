@@ -1,35 +1,6 @@
 <resources>
     <string name="app_name">Pokédex</string>
 
-    <!-- Login Page -->
-    <string name="text_error_empty_field">Please fill this field</string>
-
-    <!-- Register Page -->
-
-    <!-- Dashboard Page -->
-
-    <!-- Profile Page -->
-
-    <!-- Splash Screen - Update Dialog -->
-    <string name="text_connection_not_found">Network Not Found</string>
-    <string name="text_retry">Retry</string>
-    <string name="text_cancel">Cancel</string>
-    <string name="text_force_update_title">New version is available</string>
-    <string name="text_force_update_desc">Please, update app to new version to continue.</string>
-    <string name="text_force_update_desc_soft">Please, update app to get a better experience.</string>
-    <string name="text_update">Update</string>
-    <string name="text_no_thanks">No, thanks</string>
-
-    <!-- Toast Title -->
-    <string name="text_toast_success">Success</string>
-    <string name="text_toast_warning">Notification</string>
-    <string name="text_toast_error">Something wrong</string>
-
-    <!-- Content Description -->
-    <string name="cd_btn_back">Button Back</string>
-    <string name="cd_icon">Icon</string>
-    <string name="cd_image">Image</string>
-
     <!-- Network Errors -->
     <string name="text_error_unknown">Unknown error</string>
     <string name="text_error_default_server">Oops, can\'t connect to server. Please check your connection to internet or contact our office.</string>
@@ -40,14 +11,17 @@
     <string name="text_error_network_failure">Oops, network failure. Please check your internet connection.</string>
     <string name="text_error_conn_time_out">Oops, connection timed out. Please check your connection to internet</string>
     <string name="text_error_network_not_avail">Oops, you seem to be offline. Please check your connection to internet.</string>
-    <string name="text_no_pokemon">No. %1$d</string>
-    <string name="text_pokemon_type">Pokemon Types</string>
-    <string name="text_catch_pokemon">Catch Pokemon!</string>
-    <string name="text_save">Save</string>
-    <string name="weight">Weight :</string>
-    <string name="text_weight">%1$d lbs</string>
-    <string name="text_nickname_hint">Give the pokemon nickname</string>
-    <string name="cd_my_pokemon_button">My Pokemon Button</string>
 
+    <!-- Dashboard Page-->
+    <string name="text_no_pokemon">No. %1$d</string>
+    <string name="text_pokemon_type">Pokémon Types</string>
+    <string name="cd_my_pokemon_button">My Pokémon Button</string>
+
+    <!-- Details Pokémon Page-->
+    <string name="text_catch_pokemon">Catch Pokémon!</string>
+    <string name="text_save">Save</string>
+    <string name="text_weight_title">Weight :</string>
+    <string name="text_weight_value">%1$d lbs</string>
+    <string name="text_nickname_hint">Give the Pokémon nickname</string>
 
 </resources>

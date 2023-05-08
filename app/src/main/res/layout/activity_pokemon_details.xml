@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_regular"
             android:layout_marginTop="@dimen/spacing_smaller"
-            android:text="@string/weight"
+            android:text="@string/text_weight_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_pokemon_name" />
 
@@ -179,37 +179,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view_shimmer_1" />
 
-
-                <View
-                    android:id="@+id/view_shimmer_3"
-                    android:layout_width="50dp"
-                    android:layout_height="10dp"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginTop="40dp"
-                    android:background="@drawable/bg_rounded_gray_shimmer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_shimmer_2" />
-
-
-                <View
-                    android:id="@+id/view_shimmer_4"
-                    android:layout_width="100dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="@dimen/spacing_regular"
-                    android:layout_marginTop="45dp"
-                    android:background="@drawable/bg_rounded_gray_shimmer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_shimmer_3" />
-
-                <View
-                    android:id="@+id/view_shimmer_5"
-                    android:layout_width="100dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="@dimen/spacing_small"
-                    android:layout_marginTop="45dp"
-                    android:background="@drawable/bg_rounded_gray_shimmer"
-                    app:layout_constraintStart_toEndOf="@id/view_shimmer_4"
-                    app:layout_constraintTop_toBottomOf="@id/view_shimmer_3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.facebook.shimmer.ShimmerFrameLayout>

@@ -117,12 +117,12 @@ class PokemonDetailsActivity : AppCompatActivity() {
             typeAdapter.setData(pokemon.types)
             photoAdapter.setData(pokemon.pictures)
             viewModel.setTotalPictures(pokemon.pictures.size)
-            tvPokemonWeightValue.text = getString(R.string.text_weight, pokemon.weight)
+            tvPokemonWeightValue.text = getString(R.string.text_weight_value, pokemon.weight)
         }
     }
 
     private fun showBottomSheetNickname() {
         val sheet = NicknameDialog()
-        if(!sheet.isAdded) sheet.show(supportFragmentManager, sheet.tag)
+        if (!sheet.isAdded) sheet.show(supportFragmentManager, sheet.tag)
     }
 }
