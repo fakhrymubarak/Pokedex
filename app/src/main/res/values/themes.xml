@@ -6,8 +6,8 @@
         <item name="colorPrimaryVariant">@color/color_primary60</item>
         <item name="colorOnPrimary">@color/color_white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/color_green50</item>
-        <item name="colorSecondaryVariant">@color/color_green80</item>
+        <item name="colorSecondary">@color/color_secondary_apps</item>
+        <item name="colorSecondaryVariant">@color/color_secondary_variant</item>
         <item name="colorOnSecondary">@color/color_black</item>
 
         <!-- Customize your theme here. -->
