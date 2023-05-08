@@ -4,34 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.dashboard.DashboardActivity">
+    tools:context=".presentation.my_pokemon.MyPokemonActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_my_pokemon"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/spacing_larger"
-        android:layout_marginBottom="@dimen/spacing_larger"
-        android:contentDescription="@string/cd_my_pokemon_button"
-        android:src="@drawable/ic_pokeball_bw"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:title="Your Pokémons"
+        app:titleTextAppearance="@style/Text.SemiBold.16sp" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_pokemon"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingBottom="@dimen/spacing_regular"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:itemCount="5"
         tools:listitem="@layout/item_pokemon" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"

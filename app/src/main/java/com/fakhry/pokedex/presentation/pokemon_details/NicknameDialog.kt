@@ -26,6 +26,7 @@ class NicknameDialog : BottomSheetDialogFragment() {
         binding = DialogNicknameBinding.inflate(LayoutInflater.from(requireContext()), null, false)
         dialog.setContentView(binding.root)
         dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
+        isCancelable = false
         return dialog
     }
 

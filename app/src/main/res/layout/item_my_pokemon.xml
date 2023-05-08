@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_regular"
+    android:layout_marginTop="@dimen/spacing_small"
+    app:cardCornerRadius="@dimen/spacing_smaller">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_smaller">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_pokemon_front"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layerType="software"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeRounded"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_nickname"
+            style="@style/Text.Regular.14sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_smaller"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_pokemon_front"
+            app:layout_constraintTop_toTopOf="@id/iv_pokemon_front"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Hellfire" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_pokemon_id"
+            style="@style/Text.Regular.14sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_pokemon_front"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickname"
+            tools:text="No. 1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_pokemon_name"
+            style="@style/Text.Regular.14sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_pokemon_front"
+            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_id"
+            tools:text="Charizard" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

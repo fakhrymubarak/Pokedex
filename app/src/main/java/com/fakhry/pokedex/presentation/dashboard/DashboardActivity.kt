@@ -22,6 +22,7 @@ import com.fakhry.pokedex.databinding.ActivityDashboardBinding
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.presentation.dashboard.adapter.ItemLoadStateAdapter
 import com.fakhry.pokedex.presentation.dashboard.adapter.PokemonPagingAdapter
+import com.fakhry.pokedex.presentation.my_pokemon.MyPokemonActivity
 import com.fakhry.pokedex.presentation.pokemon_details.PokemonDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -53,6 +54,10 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(this, PokemonDetailsActivity::class.java)
             intent.putExtra(EXTRA_POKEMON_ID, it.id)
             startActivity(intent)
+        }
+
+        binding.fabMyPokemon.setOnClickListener {
+            startActivity(Intent(this, MyPokemonActivity::class.java))
         }
     }
 

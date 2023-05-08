@@ -3,6 +3,8 @@ package com.fakhry.pokedex.data.source.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.fakhry.pokedex.domain.model.MyPokemon
+import com.fakhry.pokedex.domain.model.Pokemon
 
 @Entity(tableName = "my_pokemon_entity")
 data class MyPokemonEntity(
@@ -16,4 +18,6 @@ data class MyPokemonEntity(
     @ColumnInfo(name = "pokemon_id")
     var pokemonId: Int,
 )
+
+fun MyPokemonEntity.mapToDomain(pokemon: Pokemon) = MyPokemon(nickname, pokemon)
 

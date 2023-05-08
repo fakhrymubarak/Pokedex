@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Business App</string>
+    <string name="app_name">Pokédex</string>
 
     <!-- Login Page -->
     <string name="text_error_empty_field">Please fill this field</string>
@@ -47,6 +47,7 @@
     <string name="weight">Weight :</string>
     <string name="text_weight">%1$d lbs</string>
     <string name="text_nickname_hint">Give the pokemon nickname</string>
+    <string name="cd_my_pokemon_button">My Pokemon Button</string>
 
 
 </resources>
