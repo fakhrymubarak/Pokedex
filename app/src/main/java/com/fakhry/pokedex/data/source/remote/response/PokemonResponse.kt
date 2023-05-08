@@ -1,4 +1,4 @@
-package com.fakhry.pokedex.data.model
+package com.fakhry.pokedex.data.source.remote.response
 
 import com.fakhry.pokedex.core.utils.capitalized
 import com.fakhry.pokedex.domain.model.Pokemon

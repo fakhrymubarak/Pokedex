@@ -1,7 +1,7 @@
 package com.fakhry.pokedex.domain.usecases
 
 import com.fakhry.pokedex.core.enums.DataResource
-import com.fakhry.pokedex.data.model.mapToDomain
+import com.fakhry.pokedex.data.source.remote.response.mapToDomain
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.domain.repository.PokemonRepository
 import javax.inject.Inject

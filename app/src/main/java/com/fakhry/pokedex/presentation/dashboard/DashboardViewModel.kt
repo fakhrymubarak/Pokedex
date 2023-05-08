@@ -18,14 +18,14 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(
     private val getPagingPokemon: GetPagingPokemonUseCase
 ) : ViewModel() {
-    private val _listBusiness = MutableStateFlow<PagingData<Pokemon>?>(null)
-    val listBusiness = _listBusiness.asStateFlow()
+    private val _listPokemon = MutableStateFlow<PagingData<Pokemon>?>(null)
+    val listPokemon = _listPokemon.asStateFlow()
 
-    fun getListBusiness() {
+    fun getListPokemon() {
         viewModelScope.launch(Dispatchers.IO) {
             getPagingPokemon()
                 .cachedIn(this)
-                .collectLatest { _listBusiness.emit(it) }
+                .collectLatest { _listPokemon.emit(it) }
         }
     }
 }

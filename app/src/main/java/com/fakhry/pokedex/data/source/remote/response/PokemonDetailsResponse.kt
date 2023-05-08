@@ -1,6 +1,7 @@
-package com.fakhry.pokedex.data.model
+package com.fakhry.pokedex.data.source.remote.response
 
 import com.fakhry.pokedex.core.utils.capitalized
+import com.fakhry.pokedex.data.source.local.entity.PokemonEntity
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.domain.model.PokemonType
 import com.google.gson.annotations.SerializedName
@@ -74,6 +75,16 @@ fun PokemonDetailsResponse.mapToDomain(): Pokemon {
             sprites?.backShinyFemale
         ),
         types = types.map { PokemonType(id = it.slot, name = it.type.name.capitalized()) }
+    )
+}
+
+
+fun PokemonDetailsResponse.mapToEntity(): PokemonEntity {
+    return PokemonEntity(
+        pokemonId = id,
+        name = name.capitalized(),
+        weight = weight ?: 0,
+        frontImage = sprites?.frontDefault ?: "",
     )
 }
 

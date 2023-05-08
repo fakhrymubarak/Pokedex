@@ -58,9 +58,9 @@ class DashboardActivity : AppCompatActivity() {
     private fun initObserver() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.listBusiness.collectLatest { data ->
+                viewModel.listPokemon.collectLatest { data ->
                     if (data == null) {
-                        viewModel.getListBusiness()
+                        viewModel.getListPokemon()
                         return@collectLatest
                     }
                     populateSuccessPokemon(data)

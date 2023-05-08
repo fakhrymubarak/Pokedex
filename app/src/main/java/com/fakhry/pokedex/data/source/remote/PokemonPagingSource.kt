@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.fakhry.pokedex.core.enums.NetworkException
 import com.fakhry.pokedex.core.network.NetworkState
-import com.fakhry.pokedex.data.model.PokemonData
+import com.fakhry.pokedex.data.source.remote.response.PokemonData
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
