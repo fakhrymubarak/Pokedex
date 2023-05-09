@@ -117,7 +117,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
             typeAdapter.setData(pokemon.types)
             photoAdapter.setData(pokemon.pictures)
             viewModel.setTotalPictures(pokemon.pictures.size)
-            tvPokemonWeightValue.text = getString(R.string.text_weight_value, pokemon.weight)
+            tvPokemonWeightValue.text = getString(R.string.text_weight_value, pokemon.weight.toString())
         }
     }
 

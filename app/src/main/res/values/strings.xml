@@ -21,7 +21,7 @@
     <string name="text_catch_pokemon">Catch Pokémon!</string>
     <string name="text_save">Save</string>
     <string name="text_weight_title">Weight :</string>
-    <string name="text_weight_value">%1$d lbs</string>
+    <string name="text_weight_value">%1$s kg</string>
     <string name="text_nickname_hint">Give the Pokémon nickname</string>
     <string name="text_release_pokemon">Release Pokemon?</string>
     <string name="text_release_pokemon_desc">Are you sure to release %1$s?</string>

@@ -26,7 +26,7 @@ fun PokemonEntity.mapToDomain(): Pokemon {
     return Pokemon(
         id = pokemonId,
         name = name.capitalized(),
-        weight = weight,
+        weight = weight/10.0,
         frontImage = frontImage,
     )
 }

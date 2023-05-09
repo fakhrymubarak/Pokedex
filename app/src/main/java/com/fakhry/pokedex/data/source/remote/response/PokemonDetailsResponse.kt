@@ -62,7 +62,7 @@ fun PokemonDetailsResponse.mapToDomain(): Pokemon {
     return Pokemon(
         id = id,
         name = name.capitalized(),
-        weight = weight ?: 0,
+        weight = if (weight != null) weight / 10.0 else 0.0,
         frontImage = sprites?.frontDefault ?: "",
         pictures = listOfNotNull(
             sprites?.frontDefault,
