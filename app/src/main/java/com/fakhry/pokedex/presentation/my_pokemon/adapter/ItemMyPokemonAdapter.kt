@@ -52,6 +52,7 @@ class ItemMyPokemonAdapter : RecyclerView.Adapter<ItemMyPokemonAdapter.ViewHolde
                 ivPokemonFront.loadWithShimmer(data.pokemon.frontImage)
                 tvPokemonId.text = tvPokemonId.context.getString(R.string.text_no_pokemon, data.pokemon.id)
                 tvNickname.text = data.nickname
+                tvPokemonName.text = data.pokemon.name
             }
         }
 
