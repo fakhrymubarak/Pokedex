@@ -10,6 +10,14 @@ android {
     namespace 'com.fakhry.pokedex'
     compileSdk 33
 
+    signingConfigs {
+        defaultConfig {
+            storeFile file('../creds/pokedex.jks')
+            keyAlias 'pokedex'
+            storePassword 'pokedex123'
+            keyPassword 'pokedex123'
+        }
+    }
     defaultConfig {
         applicationId "com.fakhry.pokedex"
         minSdk 21
@@ -27,10 +35,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BASE_URL", '"https://pokeapi.co/api/v2/"'
 
+            signingConfig signingConfigs.defaultConfig
         }
 
         debug {
+            applicationIdSuffix '.dev'
             versionNameSuffix '-dev'
+
             minifyEnabled false
             buildConfigField "String", "BASE_URL", '"https://pokeapi.co/api/v2/"'
         }
