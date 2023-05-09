@@ -19,5 +19,4 @@ data class MyPokemonEntity(
     var pokemonId: Int,
 )
 
-fun MyPokemonEntity.mapToDomain(pokemon: Pokemon) = MyPokemon(nickname, pokemon)
-
+fun MyPokemonEntity.mapToDomain(pokemon: Pokemon) = MyPokemon(myPokemonId, nickname, pokemon)

@@ -6,13 +6,13 @@ import com.fakhry.pokedex.core.enums.DataResource
 import com.fakhry.pokedex.core.enums.UiText
 import com.fakhry.pokedex.core.network.NetworkState
 import com.fakhry.pokedex.core.network.getMessageFromException
-import com.fakhry.pokedex.data.source.remote.response.PokemonData
-import com.fakhry.pokedex.data.source.remote.response.PokemonDetailsResponse
 import com.fakhry.pokedex.data.source.local.entity.MyPokemonEntity
 import com.fakhry.pokedex.data.source.local.entity.PokemonEntity
 import com.fakhry.pokedex.data.source.local.room.PokemonDao
 import com.fakhry.pokedex.data.source.remote.PokeApiService
 import com.fakhry.pokedex.data.source.remote.PokemonPagingSource
+import com.fakhry.pokedex.data.source.remote.response.PokemonData
+import com.fakhry.pokedex.data.source.remote.response.PokemonDetailsResponse
 import com.fakhry.pokedex.domain.repository.PokemonRepository
 import timber.log.Timber
 import javax.inject.Inject
@@ -82,6 +82,15 @@ class PokemonRepositoryImpl @Inject constructor(
             DataResource.Error(UiText.DynamicString(e.message ?: "Database Failure"))
         }
     }
+
+    override suspend fun releaseMyPokemon(myPokemonEntity: MyPokemonEntity): DataResource<MyPokemonEntity> {
+        return try {
+            dao.deleteMyPokemon(myPokemonEntity)
+            DataResource.Success(myPokemonEntity)
+        } catch (e: Exception) {
+            Timber.e(e)
+            DataResource.Error(UiText.DynamicString(e.message ?: "Database Failure"))
+        }    }
 
     override suspend fun insertMyPokemon(nickname: String, pokemonId: Int): DataResource<Boolean> {
         return try {

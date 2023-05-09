@@ -5,9 +5,11 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.fakhry.pokedex.R
 import com.fakhry.pokedex.core.enums.EXTRA_POKEMON_ID
 import com.fakhry.pokedex.core.enums.UiState
 import com.fakhry.pokedex.core.enums.asString
+import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
 import com.fakhry.pokedex.core.utils.components.showToast
 import com.fakhry.pokedex.core.utils.components.viewBinding
 import com.fakhry.pokedex.core.utils.isShimmerStarted
@@ -16,6 +18,7 @@ import com.fakhry.pokedex.databinding.ActivityMyPokemonBinding
 import com.fakhry.pokedex.domain.model.MyPokemon
 import com.fakhry.pokedex.presentation.my_pokemon.adapter.ItemMyPokemonAdapter
 import com.fakhry.pokedex.presentation.pokemon_details.PokemonDetailsActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -50,6 +53,23 @@ class MyPokemonActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_POKEMON_ID, data.pokemon.id)
             startActivity(intent)
         }
+
+        adapter.onRelease = { data ->
+            showDialogRelease(data)
+        }
+    }
+
+    private fun showDialogRelease(data: MyPokemon) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.text_release_pokemon))
+            .setCancelable(false)
+            .setMessage(getString(R.string.text_release_pokemon_desc, data.nickname))
+            .setPositiveButton(getString(R.string.text_release)) { _, _ ->
+                viewModel.releasePokemon(data)
+            }
+            .setNegativeButton(getString(R.string.text_no_thanks)) { dialog, _ ->
+                dialog.cancel()
+            }.show()
     }
 
     private fun initObserver() {
@@ -61,6 +81,14 @@ class MyPokemonActivity : AppCompatActivity() {
                     is UiState.Loading -> populateLoadingPokemon(state.isLoading)
                     is UiState.Success -> populateSuccess(state.data)
                 }
+            }
+        }
+
+        collectLifecycleFlow(viewModel.releasePokemonState) { state ->
+            when (state) {
+                is UiState.Error -> showToast(state.uiText.asString(this))
+                is UiState.Loading -> {}
+                is UiState.Success -> adapter.removeData(state.data)
             }
         }
     }

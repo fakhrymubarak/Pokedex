@@ -12,6 +12,7 @@ class ItemMyPokemonAdapter : RecyclerView.Adapter<ItemMyPokemonAdapter.ViewHolde
     private val listData = ArrayList<MyPokemon>()
 
     var onDetailsClick: ((MyPokemon) -> Unit)? = null
+    var onRelease: ((MyPokemon) -> Unit)? = null
 
     fun setData(newListData: List<MyPokemon>) {
         val previousContentSize = this.listData.size
@@ -19,6 +20,12 @@ class ItemMyPokemonAdapter : RecyclerView.Adapter<ItemMyPokemonAdapter.ViewHolde
         this.listData.addAll(newListData)
         notifyItemRangeRemoved(0, previousContentSize)
         notifyItemRangeInserted(0, newListData.size)
+    }
+
+    fun removeData(pokemon: MyPokemon) {
+        val index = listData.indexOf(pokemon)
+        this.listData.remove(pokemon)
+        notifyItemRangeRemoved(index, 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
@@ -44,7 +51,6 @@ class ItemMyPokemonAdapter : RecyclerView.Adapter<ItemMyPokemonAdapter.ViewHolde
             binding.apply {
                 ivPokemonFront.loadWithShimmer(data.pokemon.frontImage)
                 tvPokemonId.text = tvPokemonId.context.getString(R.string.text_no_pokemon, data.pokemon.id)
-                tvPokemonName.text = data.pokemon.name
                 tvNickname.text = data.nickname
             }
         }
@@ -52,7 +58,10 @@ class ItemMyPokemonAdapter : RecyclerView.Adapter<ItemMyPokemonAdapter.ViewHolde
         private fun initListener(data: MyPokemon) {
             binding.root.setOnClickListener {
                 onDetailsClick?.invoke(data)
+            }
 
+            binding.btnRelease.setOnClickListener {
+                onRelease?.invoke(data)
             }
         }
     }

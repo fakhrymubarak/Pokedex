@@ -33,7 +33,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             app:layout_constraintBottom_toTopOf="@id/tv_pokemon_id"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_release"
             app:layout_constraintStart_toEndOf="@id/iv_pokemon_front"
             app:layout_constraintTop_toTopOf="@id/iv_pokemon_front"
             app:layout_constraintVertical_chainStyle="packed"
@@ -49,9 +49,24 @@
             android:ellipsize="end"
             android:maxLines="2"
             app:layout_constraintBottom_toTopOf="@id/tv_pokemon_name"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_release"
             app:layout_constraintStart_toEndOf="@id/iv_pokemon_front"
             app:layout_constraintTop_toBottomOf="@id/tv_nickname"
+            tools:text="No. 1" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_release"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:background="@null"
+            android:padding="@dimen/spacing_smaller"
+            android:src="@drawable/ic_texture"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="No. 1" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -64,11 +79,9 @@
             android:ellipsize="end"
             android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_release"
             app:layout_constraintStart_toEndOf="@id/iv_pokemon_front"
             app:layout_constraintTop_toBottomOf="@id/tv_pokemon_id"
             tools:text="Charizard" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>
