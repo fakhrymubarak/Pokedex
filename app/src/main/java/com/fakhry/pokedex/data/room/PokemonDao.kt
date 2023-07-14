@@ -1,8 +1,8 @@
-package com.fakhry.pokedex.data.source.local.room
+package com.fakhry.pokedex.data.room
 
 import androidx.room.*
-import com.fakhry.pokedex.data.source.local.entity.MyPokemonEntity
-import com.fakhry.pokedex.data.source.local.entity.PokemonEntity
+import com.fakhry.pokedex.data.room.entity.MyPokemonEntity
+import com.fakhry.pokedex.data.room.entity.PokemonEntity
 
 @Dao
 interface PokemonDao {

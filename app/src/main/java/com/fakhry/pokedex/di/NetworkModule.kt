@@ -6,7 +6,7 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.fakhry.pokedex.BuildConfig
 import com.fakhry.pokedex.core.network.NetworkState
-import com.fakhry.pokedex.data.source.remote.PokeApiService
+import com.fakhry.pokedex.data.http.PokeApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

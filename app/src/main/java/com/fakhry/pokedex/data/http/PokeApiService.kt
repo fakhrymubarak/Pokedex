@@ -1,7 +1,7 @@
-package com.fakhry.pokedex.data.source.remote
+package com.fakhry.pokedex.data.http
 
-import com.fakhry.pokedex.data.source.remote.response.PokemonDetailsResponse
-import com.fakhry.pokedex.data.source.remote.response.PokemonResponse
+import com.fakhry.pokedex.data.http.response.PokemonDetailsResponse
+import com.fakhry.pokedex.data.http.response.PokemonResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

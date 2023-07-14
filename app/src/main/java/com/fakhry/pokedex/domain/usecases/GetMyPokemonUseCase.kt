@@ -1,7 +1,7 @@
 package com.fakhry.pokedex.domain.usecases
 
 import com.fakhry.pokedex.core.enums.DataResource
-import com.fakhry.pokedex.data.source.local.entity.mapToDomain
+import com.fakhry.pokedex.data.room.entity.mapToDomain
 import com.fakhry.pokedex.domain.model.MyPokemon
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.domain.repository.PokemonRepository

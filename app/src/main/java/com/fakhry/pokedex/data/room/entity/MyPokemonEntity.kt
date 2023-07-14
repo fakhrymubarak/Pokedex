@@ -1,4 +1,4 @@
-package com.fakhry.pokedex.data.source.local.entity
+package com.fakhry.pokedex.data.room.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

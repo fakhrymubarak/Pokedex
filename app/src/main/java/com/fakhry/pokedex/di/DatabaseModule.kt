@@ -2,8 +2,8 @@ package com.fakhry.pokedex.di
 
 import android.content.Context
 import androidx.room.Room
-import com.fakhry.pokedex.data.source.local.MyPokemonDatabase
-import com.fakhry.pokedex.data.source.local.room.PokemonDao
+import com.fakhry.pokedex.data.room.MyPokemonDatabase
+import com.fakhry.pokedex.data.room.PokemonDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

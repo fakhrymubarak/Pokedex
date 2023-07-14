@@ -1,6 +1,6 @@
 package com.fakhry.pokedex.domain.model
 
-import com.fakhry.pokedex.data.source.local.entity.MyPokemonEntity
+import com.fakhry.pokedex.data.room.entity.MyPokemonEntity
 
 data class MyPokemon(
     val id: Int,

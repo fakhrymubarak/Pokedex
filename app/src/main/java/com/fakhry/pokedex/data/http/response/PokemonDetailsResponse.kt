@@ -1,7 +1,7 @@
-package com.fakhry.pokedex.data.source.remote.response
+package com.fakhry.pokedex.data.http.response
 
 import com.fakhry.pokedex.core.utils.capitalized
-import com.fakhry.pokedex.data.source.local.entity.PokemonEntity
+import com.fakhry.pokedex.data.room.entity.PokemonEntity
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.domain.model.PokemonType
 import com.google.gson.annotations.SerializedName

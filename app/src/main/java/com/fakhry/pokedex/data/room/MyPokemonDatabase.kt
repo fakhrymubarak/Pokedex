@@ -1,10 +1,9 @@
-package com.fakhry.pokedex.data.source.local
+package com.fakhry.pokedex.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.fakhry.pokedex.data.source.local.entity.MyPokemonEntity
-import com.fakhry.pokedex.data.source.local.entity.PokemonEntity
-import com.fakhry.pokedex.data.source.local.room.PokemonDao
+import com.fakhry.pokedex.data.room.entity.MyPokemonEntity
+import com.fakhry.pokedex.data.room.entity.PokemonEntity
 
 
 @Database(

@@ -2,10 +2,10 @@ package com.fakhry.pokedex.domain.repository
 
 import androidx.paging.Pager
 import com.fakhry.pokedex.core.enums.DataResource
-import com.fakhry.pokedex.data.source.local.entity.MyPokemonEntity
-import com.fakhry.pokedex.data.source.local.entity.PokemonEntity
-import com.fakhry.pokedex.data.source.remote.response.PokemonData
-import com.fakhry.pokedex.data.source.remote.response.PokemonDetailsResponse
+import com.fakhry.pokedex.data.http.response.PokemonData
+import com.fakhry.pokedex.data.http.response.PokemonDetailsResponse
+import com.fakhry.pokedex.data.room.entity.MyPokemonEntity
+import com.fakhry.pokedex.data.room.entity.PokemonEntity
 
 interface PokemonRepository {
     suspend fun getPagingPokemon(): Pager<Int, PokemonData>
