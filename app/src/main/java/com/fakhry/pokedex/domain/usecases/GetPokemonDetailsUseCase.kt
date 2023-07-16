@@ -1,6 +1,6 @@
 package com.fakhry.pokedex.domain.usecases
 
-import com.fakhry.pokedex.core.enums.DataResource
+import com.fakhry.pokedex.state.HttpClientResult
 import com.fakhry.pokedex.data.http.response.mapToDomain
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.domain.repository.PokemonRepository
@@ -10,10 +10,10 @@ class GetPokemonDetailsUseCase @Inject constructor(
     private val repository: PokemonRepository
 ) {
 
-    suspend operator fun invoke(id: Int): DataResource<Pokemon> {
+    suspend operator fun invoke(id: Int): HttpClientResult<Pokemon> {
         return when (val dataResult = repository.getPokemonDetails(id)) {
-            is DataResource.Error -> dataResult
-            is DataResource.Success -> DataResource.Success(dataResult.data.mapToDomain())
+            is HttpClientResult.Failure -> dataResult
+            is HttpClientResult.Success -> HttpClientResult.Success(dataResult.data.mapToDomain())
         }
     }
 }

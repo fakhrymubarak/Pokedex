@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.fakhry.pokedex.R
 import com.fakhry.pokedex.core.enums.EXTRA_POKEMON_ID
-import com.fakhry.pokedex.core.enums.UiState
+import com.fakhry.pokedex.state.UiResult
 import com.fakhry.pokedex.core.enums.asString
 import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
 import com.fakhry.pokedex.core.utils.components.showToast
@@ -77,18 +77,18 @@ class MyPokemonActivity : AppCompatActivity() {
             viewModel.getListPokemon()
             viewModel.listMyPokemon.collect { state ->
                 when (state) {
-                    is UiState.Error -> showToast(state.uiText.asString(this@MyPokemonActivity))
-                    is UiState.Loading -> populateLoadingPokemon(state.isLoading)
-                    is UiState.Success -> populateSuccess(state.data)
+                    is UiResult.Error -> showToast(state.uiText.asString(this@MyPokemonActivity))
+                    is UiResult.Loading -> populateLoadingPokemon(state.isLoading)
+                    is UiResult.Success -> populateSuccess(state.data)
                 }
             }
         }
 
         collectLifecycleFlow(viewModel.releasePokemonState) { state ->
             when (state) {
-                is UiState.Error -> showToast(state.uiText.asString(this))
-                is UiState.Loading -> {}
-                is UiState.Success -> adapter.removeData(state.data)
+                is UiResult.Error -> showToast(state.uiText.asString(this))
+                is UiResult.Loading -> {}
+                is UiResult.Success -> adapter.removeData(state.data)
             }
         }
     }

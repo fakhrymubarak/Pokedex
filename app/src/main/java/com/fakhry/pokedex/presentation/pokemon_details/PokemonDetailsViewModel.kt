@@ -2,8 +2,8 @@ package com.fakhry.pokedex.presentation.pokemon_details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fakhry.pokedex.core.enums.DataResource
-import com.fakhry.pokedex.core.enums.UiState
+import com.fakhry.pokedex.state.HttpClientResult
+import com.fakhry.pokedex.state.UiResult
 import com.fakhry.pokedex.core.enums.UiText
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.domain.usecases.CatchPokemonUseCase
@@ -29,13 +29,13 @@ class PokemonDetailsViewModel @Inject constructor(
     val carouselState = MutableSharedFlow<Int>()
 
     private lateinit var pokemon: Pokemon
-    private val _pokemonDetailsState = MutableSharedFlow<UiState<Pokemon>>()
+    private val _pokemonDetailsState = MutableSharedFlow<UiResult<Pokemon>>()
     val pokemonDetailsState = _pokemonDetailsState.asSharedFlow()
 
-    private val _catchPokemonState = MutableSharedFlow<UiState<UiText>>()
+    private val _catchPokemonState = MutableSharedFlow<UiResult<UiText>>()
     val catchPokemonState = _catchPokemonState.asSharedFlow()
 
-    private val _savePokemonState = MutableSharedFlow<UiState<UiText>>()
+    private val _savePokemonState = MutableSharedFlow<UiResult<UiText>>()
     val savePokemonState = _savePokemonState.asSharedFlow()
 
     override fun onCleared() {
@@ -63,37 +63,39 @@ class PokemonDetailsViewModel @Inject constructor(
 
     fun getPokemonDetails(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            _pokemonDetailsState.emit(UiState.Loading(true))
+            _pokemonDetailsState.emit(UiResult.Loading(true))
             when (val res = _getPokemonDetails(id)) {
-                is DataResource.Error -> _pokemonDetailsState.emit(UiState.Error(res.uiText))
-                is DataResource.Success -> {
+                is HttpClientResult.Failure -> _pokemonDetailsState.emit(UiResult.Error())
+                is HttpClientResult.Success -> {
                     pokemon = res.data
-                    _pokemonDetailsState.emit(UiState.Success(pokemon))
+                    _pokemonDetailsState.emit(UiResult.Success(pokemon))
                 }
             }
-            _pokemonDetailsState.emit(UiState.Loading(false))
+            _pokemonDetailsState.emit(UiResult.Loading(false))
         }
     }
 
     fun catchPokemon() {
         viewModelScope.launch(Dispatchers.IO) {
-            _catchPokemonState.emit(UiState.Loading(true))
+            _catchPokemonState.emit(UiResult.Loading(true))
             when (val res = _catchPokemon()) {
-                is DataResource.Error -> _catchPokemonState.emit(UiState.Error(res.uiText))
-                is DataResource.Success -> _catchPokemonState.emit(UiState.Success(res.data))
+                is UiResult.Error -> _catchPokemonState.emit(UiResult.Error())
+                is UiResult.Success -> _catchPokemonState.emit(UiResult.Success(res.data))
+                is UiResult.Loading -> _catchPokemonState.emit(UiResult.Loading(true))
             }
-            _catchPokemonState.emit(UiState.Loading(false))
+            _catchPokemonState.emit(UiResult.Loading(false))
         }
     }
 
     fun saveMyPokemon(nickname: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _savePokemonState.emit(UiState.Loading(true))
+            _savePokemonState.emit(UiResult.Loading(true))
             when (val res = _catchPokemon.saveMyPokemon(nickname, pokemon.id)) {
-                is DataResource.Error -> _savePokemonState.emit(UiState.Error(res.uiText))
-                is DataResource.Success -> _savePokemonState.emit(UiState.Success(res.data))
+                is UiResult.Error -> _savePokemonState.emit(UiResult.Error())
+                is UiResult.Success -> _savePokemonState.emit(UiResult.Success(res.data))
+                is UiResult.Loading -> _savePokemonState.emit(UiResult.Loading(true))
             }
-            _savePokemonState.emit(UiState.Loading(false))
+            _savePokemonState.emit(UiResult.Loading(false))
         }
     }
 }

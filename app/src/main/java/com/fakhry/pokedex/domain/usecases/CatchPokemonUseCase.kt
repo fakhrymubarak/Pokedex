@@ -1,15 +1,16 @@
 package com.fakhry.pokedex.domain.usecases
 
-import com.fakhry.pokedex.core.enums.DataResource
+import com.fakhry.pokedex.state.UiResult
 import com.fakhry.pokedex.core.enums.UiText
 import com.fakhry.pokedex.domain.repository.PokemonRepository
+import com.fakhry.pokedex.state.HttpClientResult
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class CatchPokemonUseCase @Inject constructor(
     private val repository: PokemonRepository
 ) {
-    suspend operator fun invoke(): DataResource<UiText> {
+    suspend operator fun invoke(): UiResult<UiText> {
         delay(1500)
         val isCaught = Math.random() > 0.5
 
@@ -18,29 +19,29 @@ class CatchPokemonUseCase @Inject constructor(
                 "Gotcha! Pokémon was caught!",
                 "All right! Pokémon was caught!",
             )
-            DataResource.Success(UiText.DynamicString(listOfSuccessMessage.random()))
+            UiResult.Success(UiText.DynamicString(listOfSuccessMessage.random()))
         } else {
             val listOfFailedMessage = listOf(
                 "Oh no! The Pokémon broke free! Try again!",
                 "Aargh! Almost had it! Try Again!",
             )
-            DataResource.Error(UiText.DynamicString(listOfFailedMessage.random()))
+            UiResult.Error(UiText.DynamicString(listOfFailedMessage.random()))
         }
     }
 
-    suspend fun saveMyPokemon(_nickname: String, pokemonId: Int): DataResource<UiText> {
+    suspend fun saveMyPokemon(_nickname: String, pokemonId: Int): UiResult<UiText> {
         val nickname = _nickname.trim()
 
         if (nickname.isEmpty()) {
             val emptyTextError = UiText.DynamicString("Please fill the nickname of your Pokémon!")
-            return DataResource.Error(emptyTextError)
+            return UiResult.Error(emptyTextError)
         }
 
-        return when (val res = repository.insertMyPokemon(nickname, pokemonId)) {
-            is DataResource.Error -> DataResource.Error(res.uiText)
-            is DataResource.Success -> {
+        return when (repository.insertMyPokemon(nickname, pokemonId)) {
+            is HttpClientResult.Failure -> UiResult.Error()
+            is HttpClientResult.Success -> {
                 val successMsg = UiText.DynamicString("Success add $nickname to your pokemon list!")
-                DataResource.Success(successMsg)
+                UiResult.Success(successMsg)
             }
         }
     }

@@ -2,14 +2,14 @@ package com.fakhry.pokedex.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.fakhry.pokedex.core.enums.DataResource
-import com.fakhry.pokedex.core.enums.UiText
+import com.fakhry.pokedex.core.enums.DatabaseError
+import com.fakhry.pokedex.state.HttpClientResult
 import com.fakhry.pokedex.core.network.NetworkState
-import com.fakhry.pokedex.core.network.getMessageFromException
 import com.fakhry.pokedex.data.http.PokeApiService
 import com.fakhry.pokedex.data.http.PokemonPagingSource
 import com.fakhry.pokedex.data.http.response.PokemonData
 import com.fakhry.pokedex.data.http.response.PokemonDetailsResponse
+import com.fakhry.pokedex.data.infrastructure.execute
 import com.fakhry.pokedex.data.room.PokemonDao
 import com.fakhry.pokedex.data.room.entity.MyPokemonEntity
 import com.fakhry.pokedex.data.room.entity.PokemonEntity
@@ -40,67 +40,56 @@ class PokemonRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getPokemonDetails(id: Int): DataResource<PokemonDetailsResponse> {
-        if (networkState.isNetworkNotAvailable) return DataResource.Error(UiText.networkError)
+    override suspend fun getPokemonDetails(id: Int): HttpClientResult<PokemonDetailsResponse> = execute { apiService.getPokemonDetails(id) }
 
-        return try {
-            val result = apiService.getPokemonDetails(id)
-            DataResource.Success(result)
-        } catch (e: Exception) {
-            val networkException = getMessageFromException(e)
-            DataResource.Error(networkException.errorMessages)
-        }
-    }
 
-    override suspend fun insertPokemon(pokemon: PokemonEntity): DataResource<Boolean> {
+    override suspend fun insertPokemon(pokemon: PokemonEntity): HttpClientResult<Boolean> {
         return try {
             dao.insertPokemon(pokemon)
-            DataResource.Success(true)
+            HttpClientResult.Success(true)
         } catch (e: Exception) {
             Timber.e(e)
-            DataResource.Error(UiText.DynamicString(e.message ?: "Database Failure"))
+            HttpClientResult.Failure(DatabaseError())
         }
     }
 
-    override suspend fun getPokemonLocally(id: Int): DataResource<PokemonEntity> {
+    override suspend fun getPokemonLocally(id: Int): HttpClientResult<PokemonEntity> {
         return try {
             val localResult = dao.getPokemon(id = id) ?: throw Exception("Pokemon Not Found")
-            DataResource.Success(localResult)
+            HttpClientResult.Success(localResult)
         } catch (e: Exception) {
             Timber.e(e)
-            DataResource.Error(UiText.DynamicString(e.message ?: "Database Failure"))
+            HttpClientResult.Failure(DatabaseError())
         }
     }
 
 
-    override suspend fun getMyPokemons(): DataResource<List<MyPokemonEntity>> {
+    override suspend fun getMyPokemons(): HttpClientResult<List<MyPokemonEntity>> {
         return try {
             val localResult = dao.getMyPokemon()
-            DataResource.Success(localResult)
+            HttpClientResult.Success(localResult)
         } catch (e: Exception) {
             Timber.e(e)
-            DataResource.Error(UiText.DynamicString(e.message ?: "Database Failure"))
+            HttpClientResult.Failure(DatabaseError())
         }
     }
 
-    override suspend fun releaseMyPokemon(myPokemonEntity: MyPokemonEntity): DataResource<MyPokemonEntity> {
+    override suspend fun releaseMyPokemon(myPokemonEntity: MyPokemonEntity): HttpClientResult<MyPokemonEntity> {
         return try {
             dao.deleteMyPokemon(myPokemonEntity)
-            DataResource.Success(myPokemonEntity)
+            HttpClientResult.Success(myPokemonEntity)
         } catch (e: Exception) {
             Timber.e(e)
-            DataResource.Error(UiText.DynamicString(e.message ?: "Database Failure"))
+            HttpClientResult.Failure(DatabaseError())
         }    }
 
-    override suspend fun insertMyPokemon(nickname: String, pokemonId: Int): DataResource<Boolean> {
+    override suspend fun insertMyPokemon(nickname: String, pokemonId: Int): HttpClientResult<Boolean> {
         return try {
             dao.insertMyPokemon(MyPokemonEntity(nickname = nickname, pokemonId = pokemonId))
-            DataResource.Success(true)
+            HttpClientResult.Success(true)
         } catch (e: Exception) {
             Timber.e(e)
-            DataResource.Error(UiText.DynamicString(e.message ?: "Database Failure"))
+            HttpClientResult.Failure(DatabaseError())
         }
     }
-
-
 }

@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.fakhry.pokedex.R
 import com.fakhry.pokedex.core.enums.EXTRA_POKEMON_ID
-import com.fakhry.pokedex.core.enums.UiState
+import com.fakhry.pokedex.state.UiResult
 import com.fakhry.pokedex.core.enums.asString
 import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
 import com.fakhry.pokedex.core.utils.components.showToast
@@ -79,16 +79,16 @@ class PokemonDetailsActivity : AppCompatActivity() {
         viewModel.getPokemonDetails(pokemonId)
         collectLifecycleFlow(viewModel.pokemonDetailsState) { state ->
             when (state) {
-                is UiState.Error -> showToast(state.uiText.asString(this))
-                is UiState.Loading -> binding.shimmerDetails.isShimmerStarted(state.isLoading)
-                is UiState.Success -> populatePokemonDetails(state.data)
+                is UiResult.Error -> showToast(state.uiText.asString(this))
+                is UiResult.Loading -> binding.shimmerDetails.isShimmerStarted(state.isLoading)
+                is UiResult.Success -> populatePokemonDetails(state.data)
             }
         }
         collectLifecycleFlow(viewModel.catchPokemonState) { state ->
             when (state) {
-                is UiState.Error -> updateCatchMessage(state.uiText.asString(this), false)
-                is UiState.Loading -> populateLoadingButton(state.isLoading)
-                is UiState.Success -> {
+                is UiResult.Error -> updateCatchMessage(state.uiText.asString(this), false)
+                is UiResult.Loading -> populateLoadingButton(state.isLoading)
+                is UiResult.Success -> {
                     updateCatchMessage(state.data.asString(this), true)
                     showBottomSheetNickname()
                 }

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.activityViewModels
 import com.fakhry.pokedex.R
-import com.fakhry.pokedex.core.enums.UiState
+import com.fakhry.pokedex.state.UiResult
 import com.fakhry.pokedex.core.enums.asString
 import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
 import com.fakhry.pokedex.core.utils.components.showToast
@@ -47,12 +47,12 @@ class NicknameDialog : BottomSheetDialogFragment() {
     private fun initObserver() {
         collectLifecycleFlow(viewModel.savePokemonState) { state ->
             when (state) {
-                is UiState.Error -> {
+                is UiResult.Error -> {
                     binding.tvSaveErrMessage.isVisible(true)
                     binding.tvSaveErrMessage.text = state.uiText.asString(requireContext())
                 }
-                is UiState.Loading -> {}
-                is UiState.Success -> {
+                is UiResult.Loading -> {}
+                is UiResult.Success -> {
                     binding.tvSaveErrMessage.isVisible(false, isGone = true)
                     showToast(state.data.asString(requireContext()))
                     dialog?.dismiss()

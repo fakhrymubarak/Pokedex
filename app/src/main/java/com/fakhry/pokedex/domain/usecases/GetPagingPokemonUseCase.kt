@@ -2,7 +2,7 @@ package com.fakhry.pokedex.domain.usecases
 
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.fakhry.pokedex.core.enums.DataResource
+import com.fakhry.pokedex.state.HttpClientResult
 import com.fakhry.pokedex.data.http.response.mapToDomain
 import com.fakhry.pokedex.data.http.response.mapToEntity
 import com.fakhry.pokedex.data.room.entity.mapToDomain
@@ -26,14 +26,14 @@ class GetPagingPokemonUseCase @Inject constructor(
 
                 // get pokemon details from localDB
                 when (val localPokemon = repository.getPokemonLocally(pokemonId)) {
-                    is DataResource.Error -> {}
-                    is DataResource.Success -> return@mapper localPokemon.data.mapToDomain()
+                    is HttpClientResult.Failure -> {}
+                    is HttpClientResult.Success -> return@mapper localPokemon.data.mapToDomain()
                 }
 
                 // get pokemon details from Network
                 when (val detailsResult = repository.getPokemonDetails(pokemonId)) {
-                    is DataResource.Error -> data.mapToDomain()
-                    is DataResource.Success -> {
+                    is HttpClientResult.Failure -> data.mapToDomain()
+                    is HttpClientResult.Success -> {
                         repository.insertPokemon(detailsResult.data.mapToEntity())
                         detailsResult.data.mapToDomain()
                     }
