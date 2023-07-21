@@ -11,12 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_photo_slider"
+        <!--        <androidx.viewpager2.widget.ViewPager2-->
+        <!--            android:id="@+id/vp_photo_slider"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:clipChildren="false"-->
+        <!--            android:clipToPadding="false"-->
+        <!--            app:layout_constraintDimensionRatio="H, 1:1"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_slider"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipChildren="false"
-            android:clipToPadding="false"
             app:layout_constraintDimensionRatio="H, 1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,21 +41,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-            android:id="@+id/dots_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_normal_quarter"
-            app:dotsColor="@color/color_gray2"
-            app:dotsCornerRadius="8dp"
-            app:dotsSize="8dp"
-            app:dotsSpacing="@dimen/spacing_tiny"
-            app:dotsWidthFactor="2.5"
-            app:layout_constraintBottom_toBottomOf="@+id/vp_photo_slider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:selectedDotColor="@color/color_primary_apps"
-            tools:visibility="visible" />
+<!--        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator-->
+<!--            android:id="@+id/dots_photo"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="@dimen/spacing_normal_quarter"-->
+<!--            app:dotsColor="@color/color_gray2"-->
+<!--            app:dotsCornerRadius="8dp"-->
+<!--            app:dotsSize="8dp"-->
+<!--            app:dotsSpacing="@dimen/spacing_tiny"-->
+<!--            app:dotsWidthFactor="2.5"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/compose_slider"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:selectedDotColor="@color/color_primary_apps"-->
+<!--            tools:visibility="visible" />-->
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_pokemon_name"
@@ -57,7 +66,7 @@
             android:layout_marginTop="@dimen/spacing_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vp_photo_slider"
+            app:layout_constraintTop_toBottomOf="@id/compose_slider"
             tools:text="Business Examples Business Examples Business Examples Business Examples " />
 
         <androidx.appcompat.widget.AppCompatTextView

@@ -4,10 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.viewpager2.widget.ViewPager2
 import com.fakhry.pokedex.R
 import com.fakhry.pokedex.core.enums.EXTRA_POKEMON_ID
-import com.fakhry.pokedex.state.UiResult
 import com.fakhry.pokedex.core.enums.asString
 import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
 import com.fakhry.pokedex.core.utils.components.showToast
@@ -16,8 +14,9 @@ import com.fakhry.pokedex.core.utils.isShimmerStarted
 import com.fakhry.pokedex.core.utils.isVisible
 import com.fakhry.pokedex.databinding.ActivityPokemonDetailsBinding
 import com.fakhry.pokedex.domain.model.Pokemon
-import com.fakhry.pokedex.presentation.pokemon_details.adapter.PhotoAdapter
 import com.fakhry.pokedex.presentation.pokemon_details.adapter.PokemonTypeAdapter
+import com.fakhry.pokedex.state.UiResult
+import com.fakhry.pokedex.theme.PokedexAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -28,7 +27,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
     private var pokemonId: Int = -1
     private lateinit var typeAdapter: PokemonTypeAdapter
-    private lateinit var photoAdapter: PhotoAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,9 +45,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
             typeAdapter = PokemonTypeAdapter()
             rvTypes.adapter = typeAdapter
 
-            photoAdapter = PhotoAdapter()
-            vpPhotoSlider.adapter = photoAdapter
-            binding.dotsPhoto.attachTo(binding.vpPhotoSlider)
         }
     }
 
@@ -58,13 +53,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        binding.vpPhotoSlider.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                viewModel.setCarouselCurrentIndex(position)
-                super.onPageSelected(position)
-            }
-        })
 
 
         binding.btnCatchPokemon.setOnClickListener {
@@ -74,7 +62,9 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
     private fun initObserver() {
         viewModel.runCarousel()
-        collectLifecycleFlow(viewModel.carouselState) { i -> binding.vpPhotoSlider.currentItem = i }
+
+        // todo update carousel index jetpack compose
+        collectLifecycleFlow(viewModel.carouselState) { index -> }
 
         viewModel.getPokemonDetails(pokemonId)
         collectLifecycleFlow(viewModel.pokemonDetailsState) { state ->
@@ -115,9 +105,16 @@ class PokemonDetailsActivity : AppCompatActivity() {
         binding.apply {
             tvPokemonName.text = pokemon.name
             typeAdapter.setData(pokemon.types)
-            photoAdapter.setData(pokemon.pictures)
             viewModel.setTotalPictures(pokemon.pictures.size)
             tvPokemonWeightValue.text = getString(R.string.text_weight_value, pokemon.weight.toString())
+
+            composeSlider.setContent {
+                PokedexAppTheme{
+                    ImageSlider(
+                        images = pokemon.pictures
+                    )
+                }
+            }
         }
     }
 
