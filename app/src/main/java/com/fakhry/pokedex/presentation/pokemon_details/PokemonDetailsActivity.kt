@@ -49,12 +49,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
     }
 
     private fun initListener() {
-        binding.btnBack.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
-
-
-
         binding.btnCatchPokemon.setOnClickListener {
             viewModel.catchPokemon()
         }
@@ -108,10 +102,14 @@ class PokemonDetailsActivity : AppCompatActivity() {
             viewModel.setTotalPictures(pokemon.pictures.size)
             tvPokemonWeightValue.text = getString(R.string.text_weight_value, pokemon.weight.toString())
 
-            composeSlider.setContent {
+            composeHeader.setContent {
                 PokedexAppTheme{
-                    ImageSlider(
-                        images = pokemon.pictures
+                    HeaderSection(
+                        images = pokemon.pictures,
+                        onBackClick = {
+                            print("OnBackClick from details")
+                            onBackPressedDispatcher.onBackPressed()
+                        }
                     )
                 }
             }
