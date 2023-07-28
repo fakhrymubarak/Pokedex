@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace 'com.fakhry.pokedex'
-    compileSdk 33
+    compileSdk 34
 
     signingConfigs {
         defaultConfig {
@@ -21,7 +21,7 @@ android {
     defaultConfig {
         applicationId "com.fakhry.pokedex"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -53,11 +53,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     composeOptions {
@@ -147,13 +147,13 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview"
 
     // Compose - Libraries
-    implementation "androidx.compose.runtime:runtime"
-    implementation "androidx.compose.ui:ui:"
-    implementation "androidx.compose.foundation:foundation"
-    implementation "androidx.compose.foundation:foundation-layout"
-    implementation "androidx.compose.material:material"
-    implementation "androidx.compose.runtime:runtime-livedata"
-    implementation "com.google.accompanist:accompanist-themeadapter-material:0.28.0"
+    implementation "androidx.compose.runtime:runtime:1.4.3"
+    implementation "androidx.compose.ui:ui:1.4.3"
+    implementation "androidx.compose.foundation:foundation:1.4.3"
+    implementation "androidx.compose.foundation:foundation-layout:1.4.3"
+    implementation "androidx.compose.material:material:1.4.3"
+    implementation "androidx.compose.runtime:runtime-livedata:"
+    implementation "com.google.accompanist:accompanist-themeadapter-material:0.30.1"
 
     // Material3 Library
     implementation "androidx.compose.material3:material3:1.1.1"
