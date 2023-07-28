@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <androidx.compose.ui.platform.ComposeView
             android:id="@+id/compose_header"
             android:layout_width="match_parent"
@@ -19,68 +20,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_pokemon_name"
-            style="@style/Text.SemiBold.14sp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_regular"
-            android:layout_marginTop="@dimen/spacing_regular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/compose_header"
-            tools:text="Business Examples Business Examples Business Examples Business Examples " />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_pokemon_weight_title"
-            style="@style/Text.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_regular"
-            android:layout_marginTop="@dimen/spacing_smaller"
-            android:text="@string/text_weight_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_name" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_pokemon_weight_value"
-            style="@style/Text.Regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_smaller"
-            android:layout_marginTop="@dimen/spacing_smaller"
-            android:layout_marginEnd="@dimen/spacing_regular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_pokemon_weight_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_name"
-            tools:text="165" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_category"
-            style="@style/Text.SemiBold"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_regular"
-            android:layout_marginTop="@dimen/spacing_smaller"
-            android:text="@string/text_pokemon_type"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_weight_title" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_types"
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_tiny"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/spacing_normal_quarter"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/tv_category"
-            tools:itemCount="5"
-            tools:listitem="@layout/item_pokemon_type"
-            tools:spanCount="2" />
-
+            app:layout_constraintTop_toBottomOf="@id/compose_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_catch_message"
@@ -107,7 +54,7 @@
             android:paddingHorizontal="@dimen/spacing_regular"
             android:text="@string/text_catch_pokemon"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_types"
+            app:layout_constraintTop_toBottomOf="@id/compose_body"
             app:layout_constraintVertical_bias="1.0" />
 
         <ProgressBar

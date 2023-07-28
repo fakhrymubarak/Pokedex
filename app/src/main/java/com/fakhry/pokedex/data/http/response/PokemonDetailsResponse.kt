@@ -63,7 +63,7 @@ fun PokemonDetailsResponse.mapToDomain(): Pokemon {
         id = id,
         name = name.capitalized(),
         weight = if (weight != null) weight / 10.0 else 0.0,
-        frontImage = sprites?.frontDefault ?: "",
+        frontImage = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id",
         pictures = listOfNotNull(
             sprites?.frontDefault,
             sprites?.backDefault,
@@ -84,7 +84,7 @@ fun PokemonDetailsResponse.mapToEntity(): PokemonEntity {
         pokemonId = id,
         name = name.capitalized(),
         weight = weight ?: 0,
-        frontImage = sprites?.frontDefault ?: "",
+        frontImage = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id",
     )
 }
 

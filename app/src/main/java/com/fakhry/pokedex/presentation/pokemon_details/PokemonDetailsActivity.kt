@@ -14,7 +14,6 @@ import com.fakhry.pokedex.core.utils.isShimmerStarted
 import com.fakhry.pokedex.core.utils.isVisible
 import com.fakhry.pokedex.databinding.ActivityPokemonDetailsBinding
 import com.fakhry.pokedex.domain.model.Pokemon
-import com.fakhry.pokedex.presentation.pokemon_details.adapter.PokemonTypeAdapter
 import com.fakhry.pokedex.state.UiResult
 import com.fakhry.pokedex.theme.PokedexAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +25,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
     private val viewModel by viewModels<PokemonDetailsViewModel>()
 
     private var pokemonId: Int = -1
-    private lateinit var typeAdapter: PokemonTypeAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,11 +39,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
     private fun initView() {
         pokemonId = intent.getIntExtra(EXTRA_POKEMON_ID, -1)
         if (pokemonId == -1) return onBackPressedDispatcher.onBackPressed()
-        binding.apply {
-            typeAdapter = PokemonTypeAdapter()
-            rvTypes.adapter = typeAdapter
-
-        }
     }
 
     private fun initListener() {
@@ -90,20 +83,16 @@ class PokemonDetailsActivity : AppCompatActivity() {
     }
 
     private fun populateLoadingButton(isLoading: Boolean) {
-        binding.tvCatchMessage.isVisible(true)
         binding.btnCatchPokemon.isEnabled = !isLoading
         binding.pbLoading.isVisible(isLoading, true)
     }
 
     private fun populatePokemonDetails(pokemon: Pokemon) {
         binding.apply {
-            tvPokemonName.text = pokemon.name
-            typeAdapter.setData(pokemon.types)
             viewModel.setTotalPictures(pokemon.pictures.size)
-            tvPokemonWeightValue.text = getString(R.string.text_weight_value, pokemon.weight.toString())
 
             composeHeader.setContent {
-                PokedexAppTheme{
+                PokedexAppTheme {
                     HeaderSection(
                         images = pokemon.pictures,
                         onBackClick = {
@@ -111,6 +100,11 @@ class PokemonDetailsActivity : AppCompatActivity() {
                             onBackPressedDispatcher.onBackPressed()
                         }
                     )
+                }
+            }
+            composeBody.setContent {
+                PokedexAppTheme {
+                    BodySection(pokemon = pokemon)
                 }
             }
         }
