@@ -3,15 +3,12 @@ package com.fakhry.pokedex.presentation.pokemon_details
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import com.fakhry.pokedex.R
 import com.fakhry.pokedex.core.enums.EXTRA_POKEMON_ID
 import com.fakhry.pokedex.core.enums.asString
 import com.fakhry.pokedex.core.utils.components.collectLifecycleFlow
 import com.fakhry.pokedex.core.utils.components.showToast
 import com.fakhry.pokedex.core.utils.components.viewBinding
 import com.fakhry.pokedex.core.utils.isShimmerStarted
-import com.fakhry.pokedex.core.utils.isVisible
 import com.fakhry.pokedex.databinding.ActivityPokemonDetailsBinding
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.state.UiResult
@@ -42,8 +39,10 @@ class PokemonDetailsActivity : AppCompatActivity() {
     }
 
     private fun initListener() {
-        binding.btnCatchPokemon.setOnClickListener {
-            viewModel.catchPokemon()
+        binding.composeButton.setContent {
+            PokedexAppTheme {
+                ButtonCatch(onClick = { viewModel.catchPokemon() })
+            }
         }
     }
 
@@ -74,17 +73,19 @@ class PokemonDetailsActivity : AppCompatActivity() {
     }
 
     private fun updateCatchMessage(message: String, isSuccess: Boolean) {
-        binding.tvCatchMessage.apply {
-            text = message
-
-            val textColor = if (isSuccess) R.color.color_green50 else R.color.color_red50
-            setTextColor(ContextCompat.getColor(this@PokemonDetailsActivity, textColor))
+        binding.composeTextError.setContent {
+            PokedexAppTheme {
+                ErrorMessage(message, isSuccess)
+            }
         }
     }
 
     private fun populateLoadingButton(isLoading: Boolean) {
-        binding.btnCatchPokemon.isEnabled = !isLoading
-        binding.pbLoading.isVisible(isLoading, true)
+        binding.composeButton.setContent {
+            PokedexAppTheme {
+                ButtonCatch(onClick = { viewModel.catchPokemon() }, isLoading)
+            }
+        }
     }
 
     private fun populatePokemonDetails(pokemon: Pokemon) {
@@ -96,7 +97,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
                     HeaderSection(
                         images = pokemon.pictures,
                         onBackClick = {
-                            print("OnBackClick from details")
                             onBackPressedDispatcher.onBackPressed()
                         }
                     )

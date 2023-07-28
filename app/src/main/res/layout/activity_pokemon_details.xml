@@ -24,49 +24,27 @@
             android:id="@+id/compose_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/compose_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_catch_message"
-            style="@style/Text.Regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_regular"
-            android:layout_marginBottom="@dimen/spacing_smaller"
-            android:textAlignment="center"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/btn_catch_pokemon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Error" />
+            app:layout_constraintTop_toBottomOf="@id/compose_header" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_catch_pokemon"
-            style="@style/Button.Primary"
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_text_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_regular"
-            android:layout_marginTop="@dimen/spacing_smaller"
-            android:layout_marginBottom="@dimen/spacing_regular"
-            android:paddingHorizontal="@dimen/spacing_regular"
-            android:text="@string/text_catch_pokemon"
+            app:layout_constraintBottom_toTopOf="@id/compose_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/compose_body"
             app:layout_constraintVertical_bias="1.0" />
-
-        <ProgressBar
-            android:id="@+id/pb_loading"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="@dimen/spacing_regular"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/btn_catch_pokemon"
-            app:layout_constraintEnd_toEndOf="@id/btn_catch_pokemon"
-            app:layout_constraintTop_toTopOf="@id/btn_catch_pokemon"
-            tools:visibility="visible" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_details"
@@ -98,7 +76,6 @@
                     app:layout_constraintTop_toBottomOf="@id/view_shimmer_1" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.facebook.shimmer.ShimmerFrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

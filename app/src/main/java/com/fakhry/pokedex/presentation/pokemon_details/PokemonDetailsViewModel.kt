@@ -2,12 +2,12 @@ package com.fakhry.pokedex.presentation.pokemon_details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fakhry.pokedex.state.HttpClientResult
-import com.fakhry.pokedex.state.UiResult
 import com.fakhry.pokedex.core.enums.UiText
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.domain.usecases.CatchPokemonUseCase
 import com.fakhry.pokedex.domain.usecases.GetPokemonDetailsUseCase
+import com.fakhry.pokedex.state.HttpClientResult
+import com.fakhry.pokedex.state.UiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -79,7 +79,7 @@ class PokemonDetailsViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             _catchPokemonState.emit(UiResult.Loading(true))
             when (val res = _catchPokemon()) {
-                is UiResult.Error -> _catchPokemonState.emit(UiResult.Error())
+                is UiResult.Error -> _catchPokemonState.emit(UiResult.Error(res.uiText))
                 is UiResult.Success -> _catchPokemonState.emit(UiResult.Success(res.data))
                 is UiResult.Loading -> _catchPokemonState.emit(UiResult.Loading(true))
             }

@@ -11,6 +11,9 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -25,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -33,6 +37,7 @@ import com.fakhry.pokedex.core.enums.PokemonType
 import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.theme.ColorGray2
 import com.fakhry.pokedex.theme.ColorPrimaryApps
+import com.fakhry.pokedex.theme.ColorSecondaryApps
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -131,6 +136,47 @@ fun BodySection(pokemon: Pokemon) {
     }
 }
 
+@Composable
+fun ErrorMessage(message: String, isSuccess: Boolean) {
+    Box(
+        modifier = Modifier
+            .wrapContentSize()
+            .padding(horizontal = 16.dp)
+    ) {
+        val textColor = if (isSuccess) R.color.color_green50 else R.color.color_red50
+        Text(
+            text = message,
+            style = MaterialTheme.typography.bodyMedium.copy(colorResource(id = textColor))
+        )
+    }
+}
+
+@Composable
+fun ButtonCatch(onClick: () -> Unit, isLoading: Boolean = false) {
+    Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+            enabled = !isLoading,
+            onClick = onClick,
+            shape = RoundedCornerShape(8.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = ColorPrimaryApps)
+        ) {
+            if (isLoading) CircularProgressIndicator(
+                modifier = Modifier.padding(end = 8.dp).size(24.dp),
+                color = ColorSecondaryApps,
+                strokeWidth = 3.dp
+            )
+            Text(
+                text = stringResource(id = R.string.text_catch_pokemon),
+                style = MaterialTheme.typography.labelLarge.copy(Color.White),
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+        }
+    }
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ImageSlider(pagerState: PagerState = rememberPagerState(), images: List<String>) {
@@ -186,5 +232,3 @@ fun DotsIndicator(
         }
     }
 }
-
-/// todo Button Catch Pokemon
