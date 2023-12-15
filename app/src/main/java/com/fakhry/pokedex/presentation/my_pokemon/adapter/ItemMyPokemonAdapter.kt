@@ -8,6 +8,7 @@ import com.fakhry.pokedex.core.utils.loadWithShimmer
 import com.fakhry.pokedex.databinding.ItemMyPokemonBinding
 import com.fakhry.pokedex.domain.model.MyPokemon
 
+
 class ItemMyPokemonAdapter : RecyclerView.Adapter<ItemMyPokemonAdapter.ViewHolder>() {
     private val listData = ArrayList<MyPokemon>()
 

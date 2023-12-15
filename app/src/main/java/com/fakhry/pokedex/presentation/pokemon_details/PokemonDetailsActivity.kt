@@ -14,6 +14,7 @@ import com.fakhry.pokedex.domain.model.Pokemon
 import com.fakhry.pokedex.state.UiResult
 import com.fakhry.pokedex.theme.PokedexAppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -54,9 +55,12 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
         viewModel.getPokemonDetails(pokemonId)
         collectLifecycleFlow(viewModel.pokemonDetailsState) { state ->
+            Timber.e("state $state")
             when (state) {
                 is UiResult.Error -> showToast(state.uiText.asString(this))
-                is UiResult.Loading -> binding.shimmerDetails.isShimmerStarted(state.isLoading)
+                is UiResult.Loading -> binding.composeShimmer.setContent {
+                    ShimmerSection(isLoading = state.isLoading)
+                }
                 is UiResult.Success -> populatePokemonDetails(state.data)
             }
         }
